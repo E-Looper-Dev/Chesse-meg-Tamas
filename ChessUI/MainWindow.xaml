@@ -16,7 +16,13 @@
         <Grid.Background>
             <ImageBrush ImageSource="Assets/Board.png"/>
         </Grid.Background>
-    </Grid>
+
+            <UniformGrid x:Name="PieceGrid"
+                     Rows="8"
+                     Columns="8">
+                
+            </UniformGrid>
+        </Grid>
     </Viewbox>
     
 </Window>
