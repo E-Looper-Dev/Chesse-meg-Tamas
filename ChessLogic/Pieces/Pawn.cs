@@ -65,7 +65,7 @@ namespace ChessLogic
             {
                 if (oneMovePos.Row == 0 || oneMovePos.Row == 7)
                 {
-                    foreach (Move promMove in PromotionMoves(from, oneMovesPos))
+                    foreach (Move promMove in PromotionMoves(from, oneMovePos))
                     {
                         yield return promMove;
                     }
