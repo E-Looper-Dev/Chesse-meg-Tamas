@@ -226,7 +226,7 @@ namespace ChessUI
         {
             if (!IsMenuOnScreen() && e.Key == Key.Escape)
             {
-                ShowPauseMenu;
+                ShowPauseMenu();
             }
         }
 
@@ -245,5 +245,6 @@ namespace ChessUI
                 }
             };
         }
+
     }
 }
