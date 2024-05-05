@@ -26,11 +26,11 @@ namespace ChessLogic
                 PieceType.Knight => new Knight(color),
                 PieceType.Bishop => new Bishop(color),
                 PieceType.Rook => new Rook(color),
-                PieceType.Queen => new Queen(color)
+                _ => new Queen(color)
             };
         }
 
-        public override bool Execute(Board board)
+        public override void Execute(Board board)
         {
             Piece Pawn = board[FromPos];
             board[FromPos] = null;
@@ -38,8 +38,6 @@ namespace ChessLogic
             Piece promotionPiece = CreatePromotionPiece(Pawn.Color);
             promotionPiece.HasMoved = true;
             board[ToPos] = promotionPiece;
-
-            return true;
         }
     }
 }
