@@ -10,9 +10,20 @@ namespace ChessLogic
     {
         public override PieceType Type => PieceType.Pawn;
         public override Player Color { get; }
+
+        private readonly Direction forward;
+
         public Pawn(Player color) 
         {
             Color = color;
+            if (color == Player.White)
+            {
+                forward = Direction.North;
+            }
+            else if (color == Player.Black)
+            {
+                forward = Direction.South;
+            }
         }
         public override Piece Copy()
         {
@@ -20,6 +31,23 @@ namespace ChessLogic
             copy.HasMoved = HasMoved;
             return copy;
         }
+
+        private static bool CanMoveTo(Position pos, Board board)
+        {
+            return Board.IsInside(pos) && board.IsEmpty(pos);
+        }
+
+        private bool CanCaptureAt(Position pos, Board board)
+        {
+            if (!Board.IsInside(pos) || board.IsEmpty(pos))
+            {
+                return false;
+            }
+
+            return board[pos].Color != Color;
+        }
+
+        
 
         private static IEnumerable<Move> PromotionMoves(Position from,Position to)
         {
@@ -75,6 +103,11 @@ namespace ChessLogic
                     }
                 }
             }
+        }
+
+        public override IEnumerable<Move> GetMoves(Position from, Board board) 
+        {
+            return ForwardMoves(from, board).Concat(DiagonalMoves(from, board));
         }
     }
 }
