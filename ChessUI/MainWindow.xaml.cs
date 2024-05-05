@@ -171,9 +171,6 @@ namespace ChessUI
                 Cursor = ChessCursors.BlackCursor;
             }
         }
-
-        
-
         private void HandlePromotion(Position from, Position to)
         {
             pieceImages[to.Row, to.Column].Source = Images.GetImage(gameState.CurrentPlayer, PieceType.Pawn);
@@ -189,7 +186,6 @@ namespace ChessUI
                 HandleMove(promMove);
             };
         }
-
         private bool IsMenuOnScreen()
         {
             return MenuContainer.Content != null;
@@ -223,10 +219,6 @@ namespace ChessUI
             DrawBoard(gameState.Board);
             SetCursor(gameState.CurrentPlayer);
         } 
-    }
-}
-        }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (!IsMenuOnScreen() && e.Key == Key.Escape)
