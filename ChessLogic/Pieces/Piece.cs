@@ -12,7 +12,7 @@
         {
             for (Position pos = from + dir; Board.IsInside(pos); pos += dir)
             {
-                if (Board.IsEmpty(pos))
+                if (board.IsEmpty(pos))
                 {
                     yield return pos;
                     continue;
