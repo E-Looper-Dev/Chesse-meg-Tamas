@@ -10,6 +10,6 @@ namespace ChessUI
     {
         Restart, 
         Exit, 
-        COntiune
+        Contiune
     }
 }
