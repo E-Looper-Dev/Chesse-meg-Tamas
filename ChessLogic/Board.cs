@@ -9,11 +9,13 @@ namespace ChessLogic
     public class Board
     {
         private readonly Piece[,] pieces = new Piece[8, 8];
+
         private readonly Dictionary<Player, Position> pawnSkipPositions = new Dictionary<Player, Position>
         {
             { Player.White, null },
             { Player.Black, null }
         };
+
         public Piece this[int row, int col]
         {
             get { return pieces[row, col]; }
@@ -25,10 +27,12 @@ namespace ChessLogic
             get { return this[pos.Row, pos.Column]; }
             set { this[pos.Row, pos.Column] = value; }
         }
+
         public Position GetPawnSkipPosition(Player player)
         {
             return pawnSkipPositions[player];
         }
+
         public void SetPawnSkipPosition(Player player, Position pos)
         {
             pawnSkipPositions[player] = pos;
@@ -67,6 +71,7 @@ namespace ChessLogic
                 this[6, c] = new Rook(Player.White);
             }
         }
+
         public static bool IsInside(Position pos)
         {
             return pos.Row >= 0 && pos.Row < 8 && pos.Column >= 0 && pos.Column < 8;
@@ -115,6 +120,7 @@ namespace ChessLogic
             {
                 copy[pos] = this[pos].Copy();
             }
+
             return copy;
         }
 
@@ -179,7 +185,7 @@ namespace ChessLogic
 
         private bool IsUnmovedKingAndRook(Position kingPos, Position rookPos)
         {
-            if (IsEmpty(kingPos)) || IsEmpty(rookPos))
+            if (IsEmpty(kingPos) || IsEmpty(rookPos))
             {
                 return false;
             }
@@ -195,13 +201,23 @@ namespace ChessLogic
         {
             return player switch
             {
+                Player.White => IsUnmovedKingAndRook(new Position(7, 4), new Position(7, 7)),
+                Player.Black => IsUnmovedKingAndRook(new Position(0, 4), new Position(0, 7)),
+                _ => false
+            };
+        }
+
+        public bool CastleRightQS(Player player)
+        {
+            return player switch
+            {
                 Player.White => IsUnmovedKingAndRook(new Position(7, 4), new Position(7, 0)),
                 Player.Black => IsUnmovedKingAndRook(new Position(0, 4), new Position(0, 0)),
                 _ => false
             };
         }
 
-        private bool HasPawnInPosition(Player player, Position[] pawnPositions, Position skioPos)
+        private bool HasPawnInPosition(Player player, Position[] pawnPositions, Position skipPos)
         {
             foreach (Position pos in pawnPositions.Where(IsInside))
             {
