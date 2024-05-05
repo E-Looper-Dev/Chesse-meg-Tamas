@@ -171,9 +171,6 @@ namespace ChessUI
                 Cursor = ChessCursors.BlackCursor;
             }
         }
-
-        
-
         private void HandlePromotion(Position from, Position to)
         {
             pieceImages[to.Row, to.Column].Source = Images.GetImage(gameState.CurrentPlayer, PieceType.Pawn);
@@ -189,7 +186,6 @@ namespace ChessUI
                 HandleMove(promMove);
             };
         }
-
         private bool IsMenuOnScreen()
         {
             return MenuContainer.Content != null;
@@ -223,30 +219,32 @@ namespace ChessUI
             gameState = new GameState(Player.White, Board.Initial());
             DrawBoard(gameState.Board);
             SetCursor(gameState.CurrentPlayer);
-        }
 
+        } 
+
+        
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (!IsMenuOnScreen() && e.Key == Key.Escape)
             {
                 ShowPauseMenu;
             }
+        }
 
-            private void ShowPauseMenu()
+        private void ShowPauseMenu()
+        {
+            PauseMenu pauseMenu = new PauseMenu();
+            MenuContainer.Content = pauseMenu;
+
+            pauseMenu.OptionSelected += option =>
             {
-                PauseMenu pauseMenu = new PauseMenu();
-                MenuContainer.Content = pauseMenu;
+                MenuContainer.Content = null;
 
-                pauseMenu.OptionSelected += option =>
+                if (option == Option.Restart)
                 {
-                    MenuContainer.Content = null;
-
-                    if (option == Option.Restart)
-                    {
-                        RestartGame();
-                    }
-                };
-            }
+                    RestartGame();
+                }
+            };
         }
     }
 }
