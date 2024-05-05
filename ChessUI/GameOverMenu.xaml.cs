@@ -45,7 +45,11 @@ namespace ChessUI
 
         private static string PlayerString(Player player)
         {
-            return player switch { Player.White => "White", Player.Black => "Black", _ => "" };
+            return player switch 
+            { Player.White => "White",
+              Player.Black => "Black",
+              _ => "" 
+            };
         }
 
         private static string GetReasonText(EndReason reason, Player currentPlayer)
