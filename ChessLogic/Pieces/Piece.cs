@@ -31,7 +31,7 @@
 
         protected IEnumerable<Position> MovePositionsInDirs(Position from, Board board, Direction[] dirs)
         {
-            return dirs.SelectMany(dir => MovePositionsInDirs(from, board, dir));
+            return dirs.SelectMany(dir => MovePositionsInDirs(from, board, dirs));
         }
 
         public virtual bool CanCaptureOpponentKing(Position from, Board board)
