@@ -20,5 +20,13 @@ namespace ChessLogic
             copy.HasMoved = HasMoved;
             return copy;
         }
+
+        private static IEnumerable<Move> PromotionMoves(Position from,Position to)
+        {
+            yield return new PawnPromotion(from, to PieceType.Knight);
+            yield return new PawnPromotion(from, to PieceType.Bishop);
+            yield return new PawnPromotion(from, to PieceType.Rook);
+            yield return new PawnPromotion(from, to PieceType.Queen);
+        }
     }
 }
