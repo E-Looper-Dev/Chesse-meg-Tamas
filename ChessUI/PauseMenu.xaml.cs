@@ -36,7 +36,6 @@ namespace ChessUI
         {
             OptionSelected?.Invoke(Option.Restart);
         }
-
         
     }
 }
