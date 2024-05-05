@@ -20,7 +20,7 @@ namespace ChessLogic
 
         public static Result Win(Player winner)
         {
-            return new Result(winner, EndReason.checkmate);
+            return new Result(winner, EndReason.Checkmate);
         }
 
         public static Result Draw(EndReason reason)
