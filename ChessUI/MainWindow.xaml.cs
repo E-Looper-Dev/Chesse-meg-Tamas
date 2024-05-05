@@ -31,6 +31,7 @@ namespace ChessUI
 
             gameState = new GameState(Player.White, Board.Initial());
             DrawBoard(gameState.Board);
+            SetCursor(gameState.CurrentPlayer);
         }
 
         private void InitializeBoard()
@@ -158,6 +159,21 @@ namespace ChessUI
                 highlights[to.Row, to.Column].Fill = Brushes.Transparent;
             }
         }
+
+        private void SetCursor(Player player)
+        {
+            if (player == Player.White)
+            {
+                Cursor = ChessCursors.WhiteCursor;
+            }
+            else
+            {
+                Cursor = ChessCursors.BlackCursor;
+            }
+        }
+
+        
+
         private void HandlePromotion(Position from, Position to)
         {
             pieceImages[to.Row, to.Column].Source = Images.GetImage(gameState.CurrentPlayer, PieceType.Pawn);
@@ -207,5 +223,32 @@ namespace ChessUI
             DrawBoard(gameState.Board);
             SetCursor(gameState.CurrentPlayer);
         } 
+    }
+}
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!IsMenuOnScreen() && e.Key == Key.Escape)
+            {
+                ShowPauseMenu;
+            }
+
+            private void ShowPauseMenu()
+            {
+                PauseMenu pauseMenu = new PauseMenu();
+                MenuContainer.Content = pauseMenu;
+
+                pauseMenu.OptionSelected += option =>
+                {
+                    MenuContainer.Content = null;
+
+                    if (option == Option.Restart)
+                    {
+                        RestartGame();
+                    }
+                };
+            }
+        }
     }
 }
