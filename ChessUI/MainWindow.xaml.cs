@@ -64,6 +64,11 @@ namespace ChessUI
 
         private void BoardGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (IsMenuOnScreen())
+            {
+                return;
+            }
+
             Point point = e.GetPosition(BoardGrid);
             Position pos = ToSquarePosition(point);
 
@@ -111,6 +116,12 @@ namespace ChessUI
         {
             gameState.MakeMove(move);
             DrawBoard(gameState.Board);
+            SetCursor(gameState.CurrentPlayer);
+
+            if (gameState.IsGameOver())
+            {
+                ShowGameOver();
+            }
         }
 
         private Position ToSquarePosition(Point point)
@@ -147,9 +158,6 @@ namespace ChessUI
                 highlights[to.Row, to.Column].Fill = Brushes.Transparent;
             }
         }
-
-        
-
         private void HandlePromotion(Position from, Position to)
         {
             pieceImages[to.Row, to.Column].Source = Images.GetImage(gameState.CurrentPlayer, PieceType.Pawn);
