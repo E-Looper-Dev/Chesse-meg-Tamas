@@ -218,7 +218,12 @@ namespace ChessUI
             gameState = new GameState(Player.White, Board.Initial());
             DrawBoard(gameState.Board);
             SetCursor(gameState.CurrentPlayer);
+<<<<<<< HEAD
         } 
+=======
+        }
+
+>>>>>>> 1b116453e44199b648a15f5d7ccd5ea479b7a947
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (!IsMenuOnScreen() && e.Key == Key.Escape)
