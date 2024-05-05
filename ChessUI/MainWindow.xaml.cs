@@ -182,7 +182,7 @@ namespace ChessUI
             promMenu.PieceSelected += type =>
             {
                 MenuContainer.Content = null;
-                Move promMenu = new PawnPromotion(from, to, type);
+                Move promMove = new PawnPromotion(from, to, type);
                 HandleMove(promMove);
             };
         }
