@@ -160,7 +160,7 @@ namespace ChessLogic
             return counting.TotalCount == 3 && (counting.White(PieceType.Knight) == 1 || counting.Black(PieceType.Knight) == 1);
         }
 
-        private static bool IsKingBishopVKingBishop(Counting counting)
+        private bool IsKingBishopVKingBishop(Counting counting)
         {
             if (counting.TotalCount != 4)
             {

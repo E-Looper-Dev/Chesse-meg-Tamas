@@ -4,6 +4,6 @@
     {
         Restart, 
         Exit, 
-        Contiune
+        Continue
     }
 }
