@@ -8,7 +8,7 @@ namespace ChessLogic
 {
     public class GameState
     {
-        public Board Board {  get; }
+        public Board Board {  get; private set; }
         public Player CurrentPlayer { get; private set; }
         public Result Result { get; private set; } = null;
 
