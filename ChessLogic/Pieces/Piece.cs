@@ -1,14 +1,22 @@
-﻿namespace ChessLogic
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ChessLogic
 {
     public abstract class Piece
     {
         public abstract PieceType Type { get; }
         public abstract Player Color { get; }
         public bool HasMoved { get; set; } = false;
+
         public abstract Piece Copy();
 
         public abstract IEnumerable<Move> GetMoves(Position from, Board board);
-        protected IEnumerable<Position> MovePositionInDir(Position from, Board board, Direction dir)
+
+        protected IEnumerable<Position> MovePositionsInDir(Position from, Board board, Direction dir)
         {
             for (Position pos = from + dir; Board.IsInside(pos); pos += dir)
             {
@@ -31,7 +39,7 @@
 
         protected IEnumerable<Position> MovePositionsInDirs(Position from, Board board, Direction[] dirs)
         {
-            return dirs.SelectMany(dir => MovePositionsInDirs(from, board, dirs));
+            return dirs.SelectMany(dir => MovePositionsInDir(from, board, dir));
         }
 
         public virtual bool CanCaptureOpponentKing(Position from, Board board)
