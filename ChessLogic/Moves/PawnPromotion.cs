@@ -26,7 +26,7 @@ namespace ChessLogic
                 PieceType.Knight => new Knight(color),
                 PieceType.Bishop => new Bishop(color),
                 PieceType.Rook => new Rook(color),
-                PieceType.Queen => new Queen(color)
+                _ => new Queen(color)
             };
         }
 
